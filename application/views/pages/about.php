@@ -1,0 +1,1 @@
+<h1>About us! <?= $value?></h1>

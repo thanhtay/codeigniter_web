@@ -1,0 +1,1 @@
+<h1>Detail info : <?= $id?></h1>

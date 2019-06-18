@@ -1,4 +1,17 @@
 <?php
+function dd($string)
+{
+	echo "<pre>";
+	print_r($string);
+	echo "</pre>";
+	die;
+}
+function d($string)
+{
+	echo "<pre>";
+	print_r($string);
+	echo "</pre>";
+}
 /**
  * CodeIgniter
  *
