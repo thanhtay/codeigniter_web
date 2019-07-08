@@ -10,7 +10,7 @@
     foreach ($posts as $key => $post) {?>
 		<tr>
 			<td><?= $post->id;?></td>
-			<td><?= anchor('post/'.$post->id, $post->title);?></td>
+			<td><?= anchor('pages/post/'.$post->id, $post->title);?></td>
 			<td><?= Until::gennerateDate($post->created_at);?></td>
 			<td><?=  Until::gennerateDate($post->updated_at);?></td>
 		</tr>
