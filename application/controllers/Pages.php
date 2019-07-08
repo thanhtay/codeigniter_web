@@ -23,9 +23,12 @@ class Pages extends CI_Controller
     //     }
     // }
 
-    public function _output($output)
+    public function _output($content)
     {
-        echo $output;
+        $data = [
+            'content' => $content,
+        ];
+        echo $this->load->view($this->template, $data, true);
     }
 
     public function index()
@@ -40,8 +43,9 @@ class Pages extends CI_Controller
 
     public function contact()
     {
-        $contents = $this->load->view('pages/contact', null, true);
-        return $this->load->view($this->template, ['contents' => $contents]);
+        // $content = $this->load->view('pages/contact', null, true);
+        // return $this->load->view($this->template, ['content' => $content]);
+        $this->load->view('pages/contact');
     }
 
     public function detail($id)
@@ -79,6 +83,22 @@ class Pages extends CI_Controller
 
     public function post($id)
     {
+        var_dump($id);
+        d(base_url('pages/post/1'));    
+        d(site_url('pages/post/1'));
+        
+        $this->load->model('logic/post_model', 'post_model');
+        $post = $this->post_model->get_info($id);
+        dd($post);
+    }
+
+    public function post_friendly($id)
+    {
+        var_dump($id);
+
+        d(base_url('pages/post/1'));
+        d(site_url('pages/post_friendly/1'.url_title('abc edg')));
+        
         $this->load->model('logic/post_model', 'post_model');
         $post = $this->post_model->get_info($id);
         dd($post);

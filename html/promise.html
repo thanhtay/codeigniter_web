@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<title>Promise Javascript</title>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<h1>Promise in Javascript</h1>
+		<div class="row">
+			<table class="table table-dark">
+				<tbody>
+					<tr>
+						<td>Function</td>
+						<td>Order</td>
+						<td>Time</td>
+					</tr>
+					<tr id="f1">
+						<td class="name">f1</td>
+						<td class="order">f1</td>
+						<td class="time">f1</td>
+					</tr>
+					<tr id="f2">
+						<td class="name">f2</td>
+						<td class="order">f1</td>
+						<td class="time">f1</td>
+					</tr>
+					<tr id="f3">
+						<td class="name">f3</td>
+						<td class="order">f1</td>
+						<td class="time">f1</td>
+					</tr>
+					<tr id="f5">
+						<td class="name">f3</td>
+						<td class="order">f1</td>
+						<td class="time">f1</td>
+					</tr>
+					<tr id="f6">
+						<td class="name">f3</td>
+						<td class="order">f1</td>
+						<td class="time">f1</td>
+					</tr>
+					<tr id="f7">
+						<td class="name">f3</td>
+						<td class="order">f1</td>
+						<td class="time">f1</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="row">
+			<div class="col">
+				<button id="button-async" type="button" class="btn btn-primary">Run async</button>
+				<button id="button-sync" type="button" class="btn btn-primary">Run sync</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Optional JavaScript -->
+	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+	</script>
+	<script>
+		var timeDate = new Date();
+		var start = timeDate.getTime();
+		var order = 0;
+
+		function f1() {
+			order++;
+			$('#f1').find('.order').html(order);
+			$('#f1').find('.time').html(0);
+			return new Promise(resolve => {
+				setTimeout(function () {
+					var current = new Date();
+					resolve($('#f1').find('.time').html(current.getTime() - start));
+				}, Math.floor(Math.random() * 5000) + 1000)
+			});
+			// setTimeout(function(){
+			//     var current = new Date();
+			//     $('#f1').find('.time').html(current.getTime() - start);
+			// }, Math.floor(Math.random() * 5000) + 1000 )
+		}
+
+		function f2() {
+			order++;
+			$('#f2').find('.order').html(order);
+			$('#f2').find('.time').html(0);
+
+			return new Promise(resolve => {
+				setTimeout(function () {
+					var current = new Date();
+					resolve($('#f2').find('.time').html(current.getTime() - start));
+				}, Math.floor(Math.random() * 5000) + 1000)
+			});
+			// setTimeout(function(){
+			//     var current = new Date();
+			//     $('#f2').find('.time').html(current.getTime() - start);
+			// }, Math.floor(Math.random() * 5000) + 1000 )
+		}
+
+		function f3() {
+			order++;
+			$('#f3').find('.order').html(order);
+			$('#f3').find('.time').html(0);
+			return new Promise(resolve => {
+				setTimeout(function () {
+					var current = new Date();
+					resolve($('#f3').find('.time').html(current.getTime() - start));
+				}, Math.floor(Math.random() * 5000) + 1000)
+			});
+			// setTimeout(function(){
+			//     var current = new Date();
+			//     $('#f3').find('.time').html(current.getTime() - start);
+			// }, Math.floor(Math.random() * 5000) + 1000 )
+		}
+
+		$('#button-async').on('click', function () {
+			var current = new Date();
+			start = current.getTime();
+			order = 0;
+			f1();
+			f2();
+			f3();
+		});
+        
+		$('#button-sync').on('click', function () {
+			var current = new Date();
+			start = current.getTime();
+			order = 0;
+			promiseFunction();
+			asyncAwait();
+		});
+
+
+
+		async function asyncAwait() {
+			// await f1();
+			// await f2();
+			// await f3();
+			// await Promise.all([f1(), f2(), f3()]);
+		}
+
+		function promiseFunction() {
+			var p1 = new Promise((resolve, reject) => {
+				setTimeout(() => {
+                    resolve('test promise 1');
+                }, 1000)
+			});
+
+			p1.then(value => {
+				console.log(value); // Success!
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => {
+                        resolve('test promise 2');
+                    }, 1000);
+                })
+			}, reason => {
+				console.log(reason); // Error!
+			}).then((value) => {
+                console.log(value);
+            });
+
+		}
+
+	</script>
+</body>
+
+</html>

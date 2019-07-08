@@ -10,7 +10,7 @@
 
 <body>
     <?php $this->view('includes/header.site.php') ?>
-    <?= $contents ?>
+    <?= $content ?>
     <?php $this->view('includes/footer.site.php') ?>
 </body>
 

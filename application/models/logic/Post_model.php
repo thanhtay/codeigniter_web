@@ -22,7 +22,12 @@ class Post_model extends CI_Model
         $query = $this->db->get('posts');
 
         
-        return $query->row();
+        $data = $query->row();
+        $this->load->model('data/biz/PostBiz');
+        d($data);
+        $post = new PostBiz($data);
+        dd($post);
+
     }
 
     public function insert_post($post)
