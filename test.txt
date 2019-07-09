@@ -1,7 +1,4 @@
 <i class="fas fa-abacus    "></i>
-<<<<<<< HEAD
 abc
 efg
-=======
-abc
->>>>>>> ed4d40821ab94e144515dd30a3ec342cc24bba39
+hkl
